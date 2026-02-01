@@ -1,3 +1,4 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block title %}Home - Task Management{% endblock %}
 
@@ -5,9 +6,9 @@
 <div class="container py-5">
     {% if user.is_authenticated %}
         <!-- Logged In Dashboard -->
-        <div class="row mb-4">
+        <div class="row mb-4" style="animation: slideInLeft 0.6s ease-out;">
             <div class="col-md-8">
-                <h1>Welcome, {{ user.username }}!</h1>
+                <h1>Welcome, {{ user.username }}! 👋</h1>
                 {% if user.team %}
                     <p class="text-muted">Team: <strong>{{ user.team.name }}</strong> | Role: <strong>{{ user.get_role_display }}</strong></p>
                 {% else %}
@@ -119,9 +120,9 @@
         {% endif %}
     {% else %}
         <!-- Not Logged In Welcome -->
-        <div class="row">
+        <div class="row" style="animation: fadeIn 0.8s ease-out;">
             <div class="col-md-8 mx-auto text-center">
-                <h1 class="display-4">Task Management System</h1>
+                <h1 class="display-4" style="animation: slideInDown 0.6s ease-out;">Task Management System</h1>
                 <p class="lead">Organize and manage your team's tasks efficiently</p>
                 
                 <div class="row mt-5">

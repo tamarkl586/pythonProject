@@ -1,3 +1,4 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block title %}Tasks - Task Management{% endblock %}
 
@@ -110,13 +111,13 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     {% if task.assigned_to %}
-                                        <div class="d-flex flex-column align-items-center gap-1">
-                                            <span class="badge bg-success" style="width:22px;height:22px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">✓</span>
+                                        <div class="d-flex align-items-center justify-content-center gap-2">
+                                            <span class="badge-indicator assigned">✓</span>
                                             <small><strong>{{ task.assigned_to.username }}</strong> <span class="text-muted">({{ task.assigned_to.role }})</span></small>
                                         </div>
                                     {% else %}
-                                        <div class="d-flex flex-column align-items-center gap-1">
-                                            <span class="badge bg-secondary" style="width:22px;height:22px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">✕</span>
+                                        <div class="d-flex align-items-center justify-content-center gap-2">
+                                            <span class="badge-indicator unassigned">✕</span>
                                             <small><strong>Unassigned</strong></small>
                                         </div>
                                     {% endif %}
