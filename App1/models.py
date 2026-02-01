@@ -48,10 +48,7 @@ class Task(models.Model):
     due_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='New')
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='tasks')
-    assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_tasks') #??? SET_NULL / CASCADE
-
-    #created_at = models.DateTimeField(auto_now_add=True)
-    #updated_at = models.DateTimeField(auto_now=True)
+    assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_tasks')
 
     def __str__(self):
         return f"{self.title} ({self.status})"

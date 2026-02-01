@@ -6,36 +6,44 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="border-left: 8px solid var(--pastel-blue); border-radius: 16px; padding: 1rem;">
                 <div class="card-body">
-                    <h2 class="card-title mb-4">Your Profile</h2>
+                    <h2 class="card-title mb-4" style="color: #5a4a7a;">👤 Your Profile</h2>
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label"><strong>Username</strong></label>
-                            <p>{{ user.username }}</p>
+                            <label class="form-label" style="color: #7ec8e3;"><strong>Username</strong></label>
+                            <p class="fs-5"><strong>{{ user.username }}</strong></p>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label"><strong>Email</strong></label>
-                            <p>{{ user.email }}</p>
+                            <label class="form-label" style="color: #7ec8e3;"><strong>Email</strong></label>
+                            <p class="fs-5">{{ user.email }}</p>
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row mb-4">
                         <div class="col-md-6">
-                            <label class="form-label"><strong>Team</strong></label>
-                            <p>{% if user.team %}{{ user.team.name }}{% else %}<span class="text-muted">Not assigned</span>{% endif %}</p>
+                            <label class="form-label" style="color: #7ec8e3;"><strong>Team</strong></label>
+                            <p class="fs-5">
+                                {% if user.team %}
+                                    <span style="background: var(--pastel-blue); color: white; padding: 0.4rem 0.8rem; border-radius: 6px;">{{ user.team.name }}</span>
+                                {% else %}
+                                    <span class="text-muted">Not assigned</span>
+                                {% endif %}
+                            </p>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label"><strong>Role</strong></label>
-                            <p>{{ user.get_role_display }}</p>
+                            <label class="form-label" style="color: #7ec8e3;"><strong>Role</strong></label>
+                            <p class="fs-5">
+                                <span style="background: var(--pastel-purple); color: white; padding: 0.4rem 0.8rem; border-radius: 6px;">{{ user.get_role_display }}</span>
+                            </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
-                            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+                            <a href="{% url 'edit_profile' %}" class="btn btn-primary" style="margin-right: 0.5rem;">Edit Profile</a>
+                            <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
                         </div>
                     </div>
                 </div>

@@ -34,15 +34,12 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                # If user hasn't set up profile yet, redirect to profile setup
                 if not user.team:
                     return redirect('profile_setup')
-                # If profile is complete, redirect to task list
                 return redirect('task_list')
     else:
         form = AuthenticationForm()
     
-    # Add Bootstrap styling to form fields
     for field in form.fields.values():
         field.widget.attrs['class'] = 'form-control'
     
