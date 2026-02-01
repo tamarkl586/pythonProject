@@ -152,15 +152,15 @@ def task_list(request):
     if status_filter:
         tasks = tasks.filter(status=status_filter)
 
-    # Filter by assigned employee (username)
-    assigned_filter = request.GET.get('assigned')
-    team_members = CustomUser.objects.filter(team=team)
+    # Filter by assigned employee (supports substring search) or explicit 'Unassigned'
+    assigned_filter = (request.GET.get('assigned') or '').strip()
+    team_members = CustomUser.objects.filter(team=team).order_by('username')
     if assigned_filter:
-        assigned_user = CustomUser.objects.filter(username=assigned_filter, team=team).first()
-        if assigned_user:
-            tasks = tasks.filter(assigned_to=assigned_user)
+        if assigned_filter == '__unassigned__' or assigned_filter.lower() == 'unassigned':
+            tasks = tasks.filter(assigned_to__isnull=True)
         else:
-            tasks = tasks.none()
+            # substring match on username within the same team
+            tasks = tasks.filter(assigned_to__username__icontains=assigned_filter, assigned_to__team=team)
 
     task_summary = {
         'total': tasks.count(),
