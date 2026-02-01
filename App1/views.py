@@ -155,12 +155,34 @@ def task_list(request):
     # Filter by assigned employee (supports substring search) or explicit 'Unassigned'
     assigned_filter = (request.GET.get('assigned') or '').strip()
     team_members = CustomUser.objects.filter(team=team).order_by('username')
+
+    # Normalize assigned_filter when user selects from the autocomplete which shows "username (role)"
+    assigned_display = ''
+    assigned_query = ''
     if assigned_filter:
+        # Unassigned token
         if assigned_filter == '__unassigned__' or assigned_filter.lower() == 'unassigned':
+            assigned_query = '__unassigned__'
+            assigned_display = 'Unassigned'
+        else:
+            # If input is like "username (Role)", extract username part
+            if ' (' in assigned_filter and assigned_filter.endswith(')'):
+                assigned_query = assigned_filter.split(' (', 1)[0].strip()
+                assigned_display = assigned_filter
+            else:
+                assigned_query = assigned_filter
+                # if exact username found, build display with role
+                u = CustomUser.objects.filter(username=assigned_query, team=team).first()
+                if u:
+                    assigned_display = f"{u.username} ({u.role})"
+                else:
+                    assigned_display = assigned_filter
+
+    if assigned_query:
+        if assigned_query == '__unassigned__':
             tasks = tasks.filter(assigned_to__isnull=True)
         else:
-            # substring match on username within the same team
-            tasks = tasks.filter(assigned_to__username__icontains=assigned_filter, assigned_to__team=team)
+            tasks = tasks.filter(assigned_to__username__icontains=assigned_query, assigned_to__team=team)
 
     task_summary = {
         'total': tasks.count(),
@@ -175,6 +197,7 @@ def task_list(request):
         'user': user,
         'current_status_filter': status_filter,
         'assigned_filter': assigned_filter,
+        'assigned_display': assigned_display,
         'team_members': team_members,
         'task_summary': task_summary,
     }

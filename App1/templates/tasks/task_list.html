@@ -62,14 +62,14 @@
         </div>
         <div class="col-md-4">
             <form method="get" class="d-flex" role="search">
-                <input type="hidden" name="status" value="{{ current_status_filter }}">
-                <select name="assigned" class="form-select me-2">
-                    <option value="">All Employees</option>
-                    <option value="__unassigned__" {% if assigned_filter == '__unassigned__' %}selected{% endif %}>Unassigned</option>
+                <!-- Searching by employee will show All statuses by default -->
+                <input list="employees" name="assigned" class="form-control me-2" placeholder="Search employee..." value="{{ assigned_display }}">
+                <datalist id="employees">
+                    <option value="__unassigned__">Unassigned</option>
                     {% for member in team_members %}
-                        <option value="{{ member.username }}" {% if assigned_filter == member.username %}selected{% endif %}>{{ member.username }} ({{ member.role }})</option>
+                        <option value="{{ member.username }} ({{ member.role }})">{{ member.username }} ({{ member.role }})</option>
                     {% endfor %}
-                </select>
+                </datalist>
                 <button type="submit" class="btn btn-outline-secondary">Search</button>
             </form>
         </div>
@@ -113,7 +113,7 @@
                                     {% if task.assigned_to %}
                                         <div class="d-flex align-items-center gap-2">
                                             <span class="badge bg-success">✓</span>
-                                            <small><strong>{{ task.assigned_to.username }}</strong></small>
+                                            <small><strong>{{ task.assigned_to.username }}</strong> <span class="text-muted">({{ task.assigned_to.role }})</span></small>
                                         </div>
                                     {% else %}
                                         <div class="d-flex align-items-center gap-2">
