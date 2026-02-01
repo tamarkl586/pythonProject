@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Delete Task - Task Management{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-body">
+                    <h2 class="card-title text-danger mb-4">Delete Task</h2>
+                    
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Warning:</strong> This action cannot be undone. You are about to permanently delete this task.
+                    </div>
+
+                    <div class="card bg-light mb-4">
+                        <div class="card-body">
+                            <h6>Task Details</h6>
+                            <p><strong>Title:</strong> {{ task.title }}</p>
+                            <p><strong>Due Date:</strong> {{ task.due_date|date:"d/m/Y" }}</p>
+                            <p><strong>Status:</strong> {{ task.status }}</p>
+                        </div>
+                    </div>
+
+                    <p class="text-muted">
+                        Only managers can delete tasks with "New" status. Tasks that are in progress or completed cannot be deleted.
+                    </p>
+                    
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        
+                        <button type="submit" class="btn btn-danger w-100">Yes, Delete This Task</button>
+                        <a href="{% url 'task_detail' task.id %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

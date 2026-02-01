@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}{{ task.title }} - Task Management{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>{{ task.title }}</h2>
+            <p class="text-muted">Team: {{ task.team.name }}</p>
+        </div>
+        <div class="col-md-4 text-end">
+            {% if is_manager %}
+                <a href="{% url 'edit_task' task.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-sm">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p>{{ task.description }}</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Due Date</h6>
+                            <p><strong>{{ task.due_date|date:"d/m/Y" }}</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Status</h6>
+                            <p>
+                                <span class="badge bg-{% if task.status == 'New' %}info{% elif task.status == 'In Progress' %}warning{% else %}success{% endif %}">
+                                    {{ task.status }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h6>Assigned To</h6>
+                    <p>
+                        {% if task.assigned_to %}
+                            <strong>{{ task.assigned_to.username }}</strong> ({{ task.assigned_to.get_role_display }})
+                        {% else %}
+                            <span class="text-muted">❌ Unassigned</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- ASSOCIATE WITH TASK (if unassigned) -->
+            {% if not task.assigned_to and not is_assigned %}
+                <div class="card bg-light border-primary mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">🎯 Unassigned Task</h6>
+                        <p class="text-muted small">This task is not assigned to anyone.</p>
+                        <a href="{% url 'associate_task' task.id %}" class="btn btn-primary w-100">
+                            Associate with Me
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- EDIT STATUS (if assigned to current user or manager) -->
+            {% if is_assigned or is_manager %}
+                <div class="card bg-light border-info mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title text-info">📝 Update Status</h6>
+                        <p class="text-muted small">
+                            {% if is_assigned %}
+                                You are assigned to this task
+                            {% else %}
+                                You are a manager
+                            {% endif %}
+                        </p>
+                        <a href="{% url 'update_task_status' task.id %}" class="btn btn-info w-100">
+                            Change Status
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'task_list' %}" class="btn btn-secondary w-100">Back to Tasks</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
