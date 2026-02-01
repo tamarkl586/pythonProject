@@ -289,8 +289,9 @@ def associate_task(request, id):
     if task.assigned_to is not None:
         return redirect('task_detail', id=task.id)
     
-    # Assign task to current user
+    # Assign task to current user and change status to 'In Progress'
     task.assigned_to = user
+    task.status = 'In Progress'
     task.save()
     
     return redirect('task_detail', id=task.id)
