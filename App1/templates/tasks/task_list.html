@@ -50,15 +50,27 @@
         </div>
     </div>
 
-    <!-- Filter by Status -->
+    <!-- Filter by Status and Assigned Employee -->
     <div class="row mb-4">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="btn-group" role="group">
-                <a href="{% url 'task_list' %}" class="btn btn-outline-primary {% if not current_status_filter %}active{% endif %}">All</a>
-                <a href="{% url 'task_list' %}?status=New" class="btn btn-outline-info {% if current_status_filter == 'New' %}active{% endif %}">New</a>
-                <a href="{% url 'task_list' %}?status=In+Progress" class="btn btn-outline-warning {% if current_status_filter == 'In Progress' %}active{% endif %}">In Progress</a>
-                <a href="{% url 'task_list' %}?status=Completed" class="btn btn-outline-success {% if current_status_filter == 'Completed' %}active{% endif %}">Completed</a>
+                <a href="{% url 'task_list' %}{% if assigned_filter %}?assigned={{ assigned_filter }}{% endif %}" class="btn btn-outline-primary {% if not current_status_filter %}active{% endif %}">All</a>
+                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=New" class="btn btn-outline-info {% if current_status_filter == 'New' %}active{% endif %}">New</a>
+                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=In+Progress" class="btn btn-outline-warning {% if current_status_filter == 'In Progress' %}active{% endif %}">In Progress</a>
+                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=Completed" class="btn btn-outline-success {% if current_status_filter == 'Completed' %}active{% endif %}">Completed</a>
             </div>
+        </div>
+        <div class="col-md-4">
+            <form method="get" class="d-flex" role="search">
+                <input type="hidden" name="status" value="{{ current_status_filter }}">
+                <select name="assigned" class="form-select me-2">
+                    <option value="">All Employees</option>
+                    {% for member in team_members %}
+                        <option value="{{ member.username }}" {% if assigned_filter == member.username %}selected{% endif %}>{{ member.username }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-outline-secondary">Search</button>
+            </form>
         </div>
     </div>
 

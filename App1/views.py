@@ -151,7 +151,17 @@ def task_list(request):
     status_filter = request.GET.get('status')
     if status_filter:
         tasks = tasks.filter(status=status_filter)
-    
+
+    # Filter by assigned employee (username)
+    assigned_filter = request.GET.get('assigned')
+    team_members = CustomUser.objects.filter(team=team)
+    if assigned_filter:
+        assigned_user = CustomUser.objects.filter(username=assigned_filter, team=team).first()
+        if assigned_user:
+            tasks = tasks.filter(assigned_to=assigned_user)
+        else:
+            tasks = tasks.none()
+
     task_summary = {
         'total': tasks.count(),
         'new': tasks.filter(status='New').count(),
@@ -164,6 +174,8 @@ def task_list(request):
         'team': team,
         'user': user,
         'current_status_filter': status_filter,
+        'assigned_filter': assigned_filter,
+        'team_members': team_members,
         'task_summary': task_summary,
     }
     return render(request, 'tasks/task_list.html', context)

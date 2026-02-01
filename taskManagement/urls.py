@@ -20,7 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-   # path("", include('App1.urls')),
     path('', include('App1.urls')),
     #path('App1/', include('django.contrib.auth.urls')), # נותן לנו login/logout אוטומטי
 ]
