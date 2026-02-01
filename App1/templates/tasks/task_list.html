@@ -109,14 +109,15 @@
                                 <td class="align-middle text-center">
                                     <span class="badge bg-{% if task.status == 'New' %}info{% elif task.status == 'In Progress' %}warning{% else %}success{% endif %} d-inline-block px-3">{{ task.status }}</span>
                                 </td>
-                                <td class="align-middle text-center">
+                                <td class="align-top text-start ps-3">
                                     {% if task.assigned_to %}
-                                        <div class="d-flex align-items-center justify-content-center gap-2">
+                                        <div class="d-flex flex-column align-items-start gap-1">
                                             <span class="badge-indicator assigned">✓</span>
-                                            <small><strong>{{ task.assigned_to.username }}</strong> <span class="text-muted">({{ task.assigned_to.role }})</span></small>
+                                            <small><strong>{{ task.assigned_to.username }}</strong></small>
+                                            <small class="text-muted">({{ task.assigned_to.role }})</small>
                                         </div>
                                     {% else %}
-                                        <div class="d-flex align-items-center justify-content-center gap-2">
+                                        <div class="d-flex flex-column align-items-start gap-1">
                                             <span class="badge-indicator unassigned">✕</span>
                                             <small><strong>Unassigned</strong></small>
                                         </div>

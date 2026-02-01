@@ -6,32 +6,33 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card border-danger">
+            <div class="card" style="border-left: 8px solid #f5d5e8; border-radius: 16px;">
                 <div class="card-body">
-                    <h2 class="card-title text-danger mb-4">Delete Task</h2>
+                    <h2 class="card-title mb-4" style="color: #d9819b;">🗑️ Delete Task</h2>
                     
-                    <div class="alert alert-warning">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background: linear-gradient(135deg, rgba(245, 213, 232, 0.3), rgba(250, 225, 240, 0.4)); border: 2px solid #f5d5e8; color: #8b4558;">
                         <strong>⚠️ Warning:</strong> This action cannot be undone. You are about to permanently delete this task.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
 
-                    <div class="card bg-light mb-4">
+                    <div class="card mb-4" style="background: linear-gradient(135deg, rgba(255, 200, 217, 0.15), rgba(255, 230, 245, 0.2)); border: 2px solid #ffc0d9; border-radius: 12px;">
                         <div class="card-body">
-                            <h6>Task Details</h6>
-                            <p><strong>Title:</strong> {{ task.title }}</p>
-                            <p><strong>Due Date:</strong> {{ task.due_date|date:"d/m/Y" }}</p>
-                            <p><strong>Status:</strong> {{ task.status }}</p>
+                            <h6 style="color: #d9819b; font-weight: 700;">📋 Task Details</h6>
+                            <p style="margin-bottom: 0.5rem;"><strong style="color: #5a4a7a;">Title:</strong> <span style="color: #4a4a4a;">{{ task.title }}</span></p>
+                            <p style="margin-bottom: 0.5rem;"><strong style="color: #5a4a7a;">Due Date:</strong> <span style="color: #4a4a4a;">{{ task.due_date|date:"d/m/Y" }}</span></p>
+                            <p style="margin-bottom: 0;"><strong style="color: #5a4a7a;">Status:</strong> <span class="badge" style="background: #f5d5e8; color: #8b4558;">{{ task.status }}</span></p>
                         </div>
                     </div>
 
-                    <p class="text-muted">
-                        Only managers can delete tasks with "New" status. Tasks that are in progress or completed cannot be deleted.
+                    <p class="text-muted mb-3" style="color: #9b8aa0; font-size: 0.9rem;">
+                        ℹ️ Only managers can delete tasks with "New" status. Tasks that are in progress or completed cannot be deleted.
                     </p>
                     
                     <form method="post" novalidate>
                         {% csrf_token %}
                         
-                        <button type="submit" class="btn btn-danger w-100">Yes, Delete This Task</button>
-                        <a href="{% url 'task_detail' task.id %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+                        <button type="submit" class="btn w-100 mb-2" style="background: linear-gradient(135deg, #f5d5e8, #ffc0d9); color: white; font-weight: 700; border: none; padding: 0.8rem;">Yes, Delete This Task</button>
+                        <a href="{% url 'task_detail' task.id %}" class="btn btn-outline-primary w-100">Cancel</a>
                     </form>
                 </div>
             </div>
