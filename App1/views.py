@@ -223,6 +223,10 @@ def edit_task(request, id):
     if user.role != 'Manager' or task.team != user.team:
         return redirect('task_list')
     
+    # Only allow editing tasks with 'New' status
+    if task.status != 'New':
+        return redirect('task_detail', id=task.id)
+    
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
@@ -245,7 +249,12 @@ def update_task_status(request, id):
     if task.team != user.team:
         return redirect('task_list')
     
+    # Employees can only update status of tasks assigned to them
     if user.role == 'Employee' and task.assigned_to != user:
+        return redirect('task_detail', id=task.id)
+    
+    # Managers can only update status of tasks assigned to them
+    if user.role == 'Manager' and task.assigned_to != user:
         return redirect('task_detail', id=task.id)
     
     if request.method == "POST":
