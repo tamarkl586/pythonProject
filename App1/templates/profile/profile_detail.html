@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}View Profile - Task Management{% endblock %}
 
@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card" style="border-left: 8px solid var(--pastel-blue); border-radius: 16px; padding: 1rem;">
                 <div class="card-body">
-                    <h2 class="card-title mb-4" style="color: #5a4a7a;">👤 Your Profile</h2>
+                    <h2 class="card-title mb-4" style="color: #5a4a7a;">נ‘₪ Your Profile</h2>
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <a href="{% url 'edit_profile' %}" class="btn btn-purple" style="margin-right: 0.5rem;">Edit Profile</a>
-                            <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
+                            <a href="{% url 'home' %}" class="btn btn-profile-back">Back to Home</a>
                         </div>
                     </div>
                 </div>
@@ -52,3 +52,4 @@
     </div>
 </div>
 {% endblock %}
+

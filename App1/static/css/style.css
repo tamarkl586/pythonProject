@@ -1054,3 +1054,67 @@ input::placeholder {
         font-size: 0.8rem;
     }
 }
+/* === Appended theme overrides: pastel-blue, profile buttons, bright-yellow, filter active white frame === */
+
+/* Pastel blue button for association/assign actions */
+.btn-pastel-blue {
+    background: linear-gradient(135deg, var(--pastel-blue), #8fdfff);
+    color: #012b3a;
+    border: 2px solid rgba(255,255,255,0.1);
+    font-weight: 700;
+}
+.btn-pastel-blue:hover {
+    background: linear-gradient(135deg, #8fdfff, #5bcfff);
+    color: #001f2a;
+}
+
+/* Bright yellow used for very visible 'back to tasks' buttons */
+.btn-bright-yellow {
+    background: linear-gradient(135deg, #ffef33, #ffd700);
+    color: #2a2000;
+    font-weight: 800;
+    border: 2px solid #fff2a8;
+}
+.btn-bright-yellow:hover {
+    background: linear-gradient(135deg, #fff56b, #ffef33);
+    color: #1f1600;
+}
+
+/* Profile-specific buttons */
+.btn-profile-back {
+    background: transparent;
+    color: var(--info-color);
+    border: 3px solid rgba(255,255,255,0.0);
+    font-weight: 700;
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+}
+.btn-profile-back:hover {
+    background: rgba(191,233,255,0.18);
+    border-color: rgba(191,233,255,0.45);
+}
+.btn-profile-back:active,
+.btn-profile-back.active {
+    border: 3px solid #ffffff; /* bright white frame on click */
+    box-shadow: 0 6px 18px rgba(191,233,255,0.35);
+}
+
+.btn-save-profile {
+    background: linear-gradient(135deg, var(--pastel-blue), #6fdfff);
+    color: white;
+    font-weight: 800;
+    border: 2px solid rgba(255,255,255,0.12);
+}
+.btn-save-profile:hover {
+    background: linear-gradient(135deg, #6fdfff, #2bb7ff);
+}
+.btn-save-profile:active,
+.btn-save-profile.active {
+    background: linear-gradient(135deg, #2bb7ff, #0798d4);
+    box-shadow: 0 6px 22px rgba(43, 183, 255, 0.28);
+}
+
+/* Ensure filter/search buttons get a white frame when active (selected) */
+.btn-group .btn.active {
+    border: 2px solid #ffffff !important;
+}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}Tasks - Task Management{% endblock %}
 
@@ -118,19 +118,19 @@
                                 <td class="align-middle ps-3 nowrap">
                                     {% if task.assigned_to %}
                                         <div class="assigned-inline">
-                                            <span class="badge-indicator assigned">✓</span>
+                                            <span class="badge-indicator assigned">ג“</span>
                                             <span>Assigned to: <strong>{{ task.assigned_to.username }}</strong> <small class="text-muted">({{ task.assigned_to.role }})</small></span>
                                         </div>
                                     {% else %}
                                         <div class="assigned-inline">
-                                            <span class="badge-indicator unassigned">✕</span>
+                                            <span class="badge-indicator unassigned">ג•</span>
                                             <span><strong>Not Assigned</strong></span>
                                         </div>
                                     {% endif %}
                                 </td>
                                 <td class="align-middle text-center">
                                     {% if not task.assigned_to %}
-                                        <a href="{% url 'associate_task' task.id %}" class="btn btn-yellow btn-sm">Assign</a>
+                                        <a href="{% url 'associate_task' task.id %}" class="btn btn-pastel-blue btn-sm">Assign</a>
                                     {% endif %}
                                 </td>
                                 <td class="align-middle text-center">
@@ -154,3 +154,4 @@
     </div>
 </div>
 {% endblock %}
+

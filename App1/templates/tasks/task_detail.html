@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ task.title }} - Task Management{% endblock %}
 
@@ -56,7 +56,7 @@
                         {% if task.assigned_to %}
                             <strong>{{ task.assigned_to.username }}</strong> ({{ task.assigned_to.get_role_display }})
                         {% else %}
-                            <span class="text-muted">❌ Unassigned</span>
+                            <span class="text-muted">ג Unassigned</span>
                         {% endif %}
                     </p>
                 </div>
@@ -68,9 +68,9 @@
             {% if not task.assigned_to and not is_assigned %}
                 <div class="card bg-light border-primary mb-3">
                     <div class="card-body">
-                        <h6 class="card-title text-primary">🎯 Unassigned Task</h6>
+                        <h6 class="card-title text-primary">נ¯ Unassigned Task</h6>
                         <p class="text-muted small">This task is not assigned to anyone.</p>
-                            <a href="{% url 'associate_task' task.id %}" class="btn btn-yellow w-100">
+                            <a href="{% url 'associate_task' task.id %}" class="btn btn-pastel-blue w-100">
                             Associate with Me
                         </a>
                     </div>
@@ -81,7 +81,7 @@
             {% if is_assigned %}
                 <div class="card bg-light border-info mb-3">
                     <div class="card-body">
-                        <h6 class="card-title text-info">📝 Update Status</h6>
+                        <h6 class="card-title text-info">נ“ Update Status</h6>
                         <p class="text-muted small">You are assigned to this task</p>
                         <a href="{% url 'update_task_status' task.id %}" class="btn btn-info w-100">
                             Change Status
@@ -92,10 +92,11 @@
 
             <div class="card">
                 <div class="card-body">
-                        <a href="{% url 'task_list' %}" class="btn btn-yellow-light w-100">Back to Tasks</a>
+                        <a href="{% url 'task_list' %}" class="btn btn-bright-yellow w-100">Back to Tasks</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
