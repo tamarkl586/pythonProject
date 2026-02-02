@@ -125,35 +125,35 @@ a:hover {
     margin-bottom: 1rem;
 }
 
-/* Detail label/value styling: make labels (Title/Due Date/Assigned To) larger and bolder than descriptions */
+/* Detail label/value styling: labels larger (not bold), values smaller (not bold) - like description */
 .detail-label {
-    font-weight: 800;
-    font-size: 1rem;
+    font-weight: 400;
+    font-size: 1.05rem;
     color: #5a4a7a;
     margin-bottom: 0.25rem;
 }
 .detail-label-inline {
-    font-weight: 800;
-    font-size: 0.95rem;
+    font-weight: 400;
+    font-size: 1rem;
     color: #5a4a7a;
     margin-right: 0.5rem;
 }
 .detail-desc {
-    font-size: 0.85rem;
-    color: #3f3f45;
+    font-size: 0.95rem;
+    color: #4a4a4a;
     margin: 0;
     font-weight: 400;
 }
 .detail-value { 
     font-weight: 400; 
-    font-size: 0.9rem; 
-    color: #3a2f44; 
+    font-size: 0.95rem; 
+    color: #4a4a4a; 
 }
 
-/* Also ensure strong labels inside cards are emphasized */
+/* Also ensure strong labels inside cards are NOT bold */
 .card p > strong {
-    font-weight: 800;
-    font-size: 0.95rem;
+    font-weight: 400;
+    font-size: 1.05rem;
     color: #5a4a7a;
     margin-right: 0.45rem;
 }
