@@ -10,7 +10,7 @@
             <div class="col-md-8">
                 <h1>Welcome, {{ user.username }}! 👋</h1>
                 {% if user.team %}
-                    <p class="text-muted">Team: <strong>{{ user.team.name }}</strong> | Role: <strong>{{ user.get_role_display }}</strong></p>
+                    <p class="text-muted"><span class="detail-label-inline">Team:</span> <strong>{{ user.team.name }}</strong> | <span class="detail-label-inline">Role:</span> <strong>{{ user.get_role_display }}</strong></p>
                 {% else %}
                     <p class="alert alert-warning">Please complete your profile to get started.</p>
                 {% endif %}

@@ -132,6 +132,12 @@ a:hover {
     color: #5a4a7a;
     margin-bottom: 0.25rem;
 }
+.detail-label-inline {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #5a4a7a;
+    margin-right: 0.5rem;
+}
 .detail-desc {
     font-size: 0.98rem;
     color: #3f3f45;

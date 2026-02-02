@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ task.title }} - Task Management{% endblock %}
 
@@ -7,7 +7,7 @@
     <div class="row mb-4">
         <div class="col-md-8">
             <h2>{{ task.title }}</h2>
-            <p class="text-muted">Team: {{ task.team.name }}</p>
+            <p class="text-muted"><span class="detail-label-inline">Team:</span> {{ task.team.name }}</p>
         </div>
         <div class="col-md-4 text-end">
             {% if is_manager and task.status == 'New' %}
@@ -28,37 +28,41 @@
 
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <h6 class="detail-label">Due Date</h6>
-                            <p class="detail-desc"><strong class="detail-value">{{ task.due_date|date:"d/m/Y" }}</strong></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <h6 class="detail-label">Status</h6>
-                            <p class="detail-desc mt-2">
-                                {% if task.status == 'New' %}
-                                    <span class="status-new">{{ task.status }}</span>
-                                {% elif task.status == 'In Progress' %}
-                                    <span class="status-inprogress">{{ task.status }}</span>
-                                {% else %}
-                                    <span class="status-completed">{{ task.status }}</span>
-                                {% endif %}
-                            </p>
-                        </div>
-                    </div>
+                    <h6 class="detail-label">Team</h6>
+                    <p class="detail-desc"><span class="detail-value">{{ task.team.name }}</span></p>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h6>Assigned To</h6>
-                    <p>
-                        {% if task.assigned_to %}
-                            <strong>{{ task.assigned_to.username }}</strong> ({{ task.assigned_to.get_role_display }})
+                    <h6 class="detail-label">Due Date</h6>
+                    <p class="detail-desc"><span class="detail-value">{{ task.due_date|date:"d/m/Y" }}</span></p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6 class="detail-label">Status</h6>
+                    <p class="detail-desc">
+                        {% if task.status == 'New' %}
+                            <span class="status-new">{{ task.status }}</span>
+                        {% elif task.status == 'In Progress' %}
+                            <span class="status-inprogress">{{ task.status }}</span>
                         {% else %}
-                            <span class="text-muted">ג Unassigned</span>
+                            <span class="status-completed">{{ task.status }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6 class="detail-label">Assigned To</h6>
+                    <p class="detail-desc">
+                        {% if task.assigned_to %}
+                            <span class="detail-value">{{ task.assigned_to.username }}</span> <span class="text-muted">({{ task.assigned_to.get_role_display }})</span>
+                        {% else %}
+                            <span class="text-muted">Unassigned</span>
                         {% endif %}
                     </p>
                 </div>
@@ -70,7 +74,7 @@
             {% if not task.assigned_to and not is_assigned %}
                 <div class="card bg-light border-primary mb-3">
                     <div class="card-body">
-                        <h6 class="card-title text-primary">נ¯ Unassigned Task</h6>
+                        <h6 class="card-title text-primary">🎯 Unassigned Task</h6>
                         <p class="text-muted small">This task is not assigned to anyone.</p>
                             <a href="{% url 'associate_task' task.id %}" class="btn btn-pastel-blue w-100">
                             Associate with Me
@@ -83,7 +87,7 @@
             {% if is_assigned %}
                 <div class="card bg-light border-info mb-3">
                     <div class="card-body">
-                        <h6 class="card-title text-info">נ“ Update Status</h6>
+                        <h6 class="card-title text-info">📝 Update Status</h6>
                         <p class="text-muted small">You are assigned to this task</p>
                         <a href="{% url 'update_task_status' task.id %}" class="btn btn-info w-100">
                             Change Status
@@ -101,4 +105,3 @@
     </div>
 </div>
 {% endblock %}
-
