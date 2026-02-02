@@ -118,13 +118,13 @@
                                 <td class="align-middle ps-3 nowrap">
                                     {% if task.assigned_to %}
                                         <div class="assigned-inline">
-                                            <span class="badge-indicator assigned">ג“</span>
-                                            <span>Assigned to: <strong>{{ task.assigned_to.username }}</strong> <small class="text-muted">({{ task.assigned_to.role }})</small></span>
+                                            <span class="badge-indicator assigned">✓</span>
+                                            <span><strong>{{ task.assigned_to.username }}</strong> <small class="text-muted">({{ task.assigned_to.role }})</small></span>
                                         </div>
                                     {% else %}
                                         <div class="assigned-inline">
-                                            <span class="badge-indicator unassigned">ג•</span>
-                                            <span><strong>Not Assigned</strong></span>
+                                            <span class="badge-indicator unassigned">X</span>
+                                            <span><strong>Unassigned</strong></span>
                                         </div>
                                     {% endif %}
                                 </td>
