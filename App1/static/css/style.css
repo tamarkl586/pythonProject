@@ -186,7 +186,7 @@ a:hover {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-dark), #1d4ed8);
+    background: linear-gradient(135deg, var(--primary-dark), #b7c8f7);
     color: white;
 }
 
@@ -347,22 +347,22 @@ a:hover {
 }
 
 .btn-info {
-    background: linear-gradient(135deg, var(--info-color), #5cd4ff);
+    background: linear-gradient(135deg, var(--info-color), #75d9fd);
     color: white;
 }
 
 .btn-info:hover {
-    background: linear-gradient(135deg, #5cd4ff, #2ba3d4);
+    background: linear-gradient(135deg, #78d4f6, #40bef0);
     color: white;
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, var(--warning-color), #d97706);
+    background: linear-gradient(135deg, var(--warning-color), #f5a850);
     color: white;
 }
 
 .btn-warning:hover {
-    background: linear-gradient(135deg, #d97706, #b45309);
+    background: linear-gradient(135deg, #f7bc7a, #c07740);
     color: white;
 }
 
@@ -377,12 +377,12 @@ a:hover {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--pastel-peach), #ffb366);
+    background: linear-gradient(135deg, var(--pastel-peach), #f5a850);
     color: white;
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #ffb366, #ff9933);
+    background: linear-gradient(135deg, #f7bc7a, #c07740);
     color: white;
 }
 
@@ -397,20 +397,20 @@ a:hover {
 }
 
 .btn-yellow {
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    background: linear-gradient(135deg, #ffe65b, #f8ed8b);
     color: #4a3a00;
     font-weight: 600;
 }
 
 .btn-yellow:hover {
-    background: linear-gradient(135deg, #ffed4e, #ffff99);
+    background: linear-gradient(135deg, #fff067, #f8f8aa);
     color: #2a2000;
 }
 
 .btn-yellow-light {
     background: linear-gradient(135deg, #fff5cc, #fffaeb);
     color: #6b5a00;
-    border: 2px solid #ffed4e;
+    border: 2px solid #fff38a;
     font-weight: 600;
 }
 
@@ -440,12 +440,12 @@ a:hover {
 
 /* Status Badges */
 .badge.bg-info {
-    background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+    background: linear-gradient(135deg, #82d6e5, #64cae4) !important;
     color: white;
 }
 
 .badge.bg-warning {
-    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    background: linear-gradient(135deg, #efc680, #da984b) !important;
     color: white;
 }
 
@@ -1075,24 +1075,24 @@ input::placeholder {
 /* Pastel blue button for association/assign actions */
 .btn-pastel-blue {
     background: linear-gradient(135deg, var(--pastel-blue), #8fdfff);
-    color: #012b3a;
+    color: #26718d;
     border: 2px solid rgba(255,255,255,0.1);
     font-weight: 700;
 }
 .btn-pastel-blue:hover {
     background: linear-gradient(135deg, #8fdfff, #5bcfff);
-    color: #001f2a;
+    color:  #26718d;
 }
 
 /* Bright yellow used for very visible 'back to tasks' buttons */
 .btn-bright-yellow {
-    background: linear-gradient(135deg, #ffef33, #ffd700);
+    background: linear-gradient(135deg, #f4f0be, #f0e39b);
     color: #2a2000;
     font-weight: 800;
-    border: 2px solid #fff2a8;
+    border: 2px solid #f9e15b;
 }
 .btn-bright-yellow:hover {
-    background: linear-gradient(135deg, #fff56b, #ffef33);
+    background: linear-gradient(135deg, #fbf4ab, #fbe981);
     color: #1f1600;
 }
 
@@ -1122,12 +1122,12 @@ input::placeholder {
     border: 2px solid rgba(255,255,255,0.12);
 }
 .btn-save-profile:hover {
-    background: linear-gradient(135deg, #6fdfff, #2bb7ff);
+    background: linear-gradient(135deg, #92ddf3, #50c4fe);
 }
 .btn-save-profile:active,
 .btn-save-profile.active {
-    background: linear-gradient(135deg, #2bb7ff, #0798d4);
-    box-shadow: 0 6px 22px rgba(43, 183, 255, 0.28);
+    background: linear-gradient(135deg, #a6ddf9, #70c9ef);
+    box-shadow: 0 6px 22px rgba(64, 184, 245, 0.28);
 }
 
 /* Ensure filter/search buttons get a white frame when active (selected) */
