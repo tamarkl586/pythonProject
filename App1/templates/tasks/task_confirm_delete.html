@@ -31,8 +31,8 @@
                     <form method="post" novalidate>
                         {% csrf_token %}
                         
-                        <button type="submit" class="btn w-100 mb-2" style="background: linear-gradient(135deg, #f5d5e8, #ffc0d9); color: white; font-weight: 700; border: none; padding: 0.8rem;">Yes, Delete This Task</button>
-                        <a href="{% url 'task_detail' task.id %}" class="btn btn-outline-primary w-100">Cancel</a>
+                        <button type="submit" class="btn btn-danger w-100 mb-2">Yes, Delete This Task</button>
+                            <a href="{% url 'task_detail' task.id %}" class="btn btn-yellow-light w-100">Cancel</a>
                     </form>
                 </div>
             </div>

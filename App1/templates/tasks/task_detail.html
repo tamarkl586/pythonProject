@@ -11,8 +11,8 @@
         </div>
         <div class="col-md-4 text-end">
             {% if is_manager and task.status == 'New' %}
-                <a href="{% url 'edit_task' task.id %}" class="btn btn-warning btn-sm">Edit</a>
-                <a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'edit_task' task.id %}" class="btn btn-purple btn-sm">Edit</a>
+                <a href="{% url 'delete_task' task.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
             {% endif %}
         </div>
     </div>
@@ -35,11 +35,15 @@
                         </div>
                         <div class="col-md-6">
                             <h6>Status</h6>
-                            <p>
-                                <span class="badge bg-{% if task.status == 'New' %}info{% elif task.status == 'In Progress' %}warning{% else %}success{% endif %}">
-                                    {{ task.status }}
-                                </span>
-                            </p>
+                                <p>
+                                    {% if task.status == 'New' %}
+                                        <span class="status-new">{{ task.status }}</span>
+                                    {% elif task.status == 'In Progress' %}
+                                        <span class="status-inprogress">{{ task.status }}</span>
+                                    {% else %}
+                                        <span class="status-completed">{{ task.status }}</span>
+                                    {% endif %}
+                                </p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +70,7 @@
                     <div class="card-body">
                         <h6 class="card-title text-primary">🎯 Unassigned Task</h6>
                         <p class="text-muted small">This task is not assigned to anyone.</p>
-                        <a href="{% url 'associate_task' task.id %}" class="btn btn-primary w-100">
+                            <a href="{% url 'associate_task' task.id %}" class="btn btn-yellow w-100">
                             Associate with Me
                         </a>
                     </div>
@@ -88,7 +92,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <a href="{% url 'task_list' %}" class="btn btn-secondary w-100">Back to Tasks</a>
+                        <a href="{% url 'task_list' %}" class="btn btn-yellow-light w-100">Back to Tasks</a>
                 </div>
             </div>
         </div>

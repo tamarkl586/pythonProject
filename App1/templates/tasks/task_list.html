@@ -18,34 +18,34 @@
     <!-- Task Summary Cards -->
     <div class="row mb-4">
         <div class="col-md-3">
-            <div class="card text-center">
+            <div class="card text-center summary-card summary-total">
                 <div class="card-body">
-                    <h6 class="card-title">Total</h6>
-                    <h3>{{ task_summary.total }}</h3>
+                    <h6 class="card-title summary-title">Total</h6>
+                    <h3 class="summary-value">{{ task_summary.total }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center">
+            <div class="card text-center summary-card summary-new">
                 <div class="card-body">
-                    <h6 class="card-title">New</h6>
-                    <h3>{{ task_summary.new }}</h3>
+                    <h6 class="card-title summary-title">New</h6>
+                    <h3 class="summary-value">{{ task_summary.new }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center">
+            <div class="card text-center summary-card summary-progress">
                 <div class="card-body">
-                    <h6 class="card-title">In Progress</h6>
-                    <h3>{{ task_summary.in_progress }}</h3>
+                    <h6 class="card-title summary-title">In Progress</h6>
+                    <h3 class="summary-value">{{ task_summary.in_progress }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center">
+            <div class="card text-center summary-card summary-completed">
                 <div class="card-body">
-                    <h6 class="card-title">Completed</h6>
-                    <h3>{{ task_summary.completed }}</h3>
+                    <h6 class="card-title summary-title">Completed</h6>
+                    <h3 class="summary-value">{{ task_summary.completed }}</h3>
                 </div>
             </div>
         </div>
@@ -55,9 +55,9 @@
     <div class="row mb-4">
         <div class="col-md-8">
             <div class="btn-group" role="group">
-                <a href="{% url 'task_list' %}{% if assigned_filter %}?assigned={{ assigned_filter }}{% endif %}" class="btn btn-outline-primary {% if not current_status_filter %}active{% endif %}">All</a>
-                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=New" class="btn btn-outline-info {% if current_status_filter == 'New' %}active{% endif %}">New</a>
-                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=In+Progress" class="btn btn-outline-warning {% if current_status_filter == 'In Progress' %}active{% endif %}">In Progress</a>
+                <a href="{% url 'task_list' %}{% if assigned_filter %}?assigned={{ assigned_filter }}{% endif %}" class="btn btn-outline-all {% if not current_status_filter %}active{% endif %}">All</a>
+                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=New" class="btn btn-outline-new {% if current_status_filter == 'New' %}active{% endif %}">New</a>
+                <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=In+Progress" class="btn btn-outline-progress {% if current_status_filter == 'In Progress' %}active{% endif %}">In Progress</a>
                 <a href="{% url 'task_list' %}?{% if assigned_filter %}assigned={{ assigned_filter }}&{% endif %}status=Completed" class="btn btn-outline-success {% if current_status_filter == 'Completed' %}active{% endif %}">Completed</a>
             </div>
         </div>
@@ -71,7 +71,7 @@
                         <option value="{{ member.username }} ({{ member.role }})">{{ member.username }} ({{ member.role }})</option>
                     {% endfor %}
                 </datalist>
-                <button type="submit" class="btn btn-outline-secondary">Search</button>
+                <button type="submit" class="btn btn-secondary">Search</button>
             </form>
         </div>
     </div>
@@ -83,11 +83,11 @@
                 <table class="table table-hover">
                     <thead class="table-light">
                         <tr>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Description</th>
+                            <th class="text-start">Title</th>
+                            <th class="text-start">Description</th>
                             <th class="text-center">Due Date</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Assigned To</th>
+                            <th class="text-start">Assigned To</th>
                             <th class="text-center"></th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -106,31 +106,36 @@
                                     </small>
                                 </td>
                                 <td class="align-middle text-center">{{ task.due_date|date:"d/m/Y" }}</td>
-                                <td class="align-middle text-center">
-                                    <span class="badge bg-{% if task.status == 'New' %}info{% elif task.status == 'In Progress' %}warning{% else %}success{% endif %} d-inline-block px-3">{{ task.status }}</span>
+                                <td class="align-middle text-center status-column nowrap">
+                                    {% if task.status == 'New' %}
+                                        <span class="status-new">{{ task.status }}</span>
+                                    {% elif task.status == 'In Progress' %}
+                                        <span class="status-inprogress">{{ task.status }}</span>
+                                    {% else %}
+                                        <span class="status-completed">{{ task.status }}</span>
+                                    {% endif %}
                                 </td>
-                                <td class="align-top text-start ps-3">
+                                <td class="align-middle ps-3 nowrap">
                                     {% if task.assigned_to %}
-                                        <div class="d-flex flex-column align-items-start gap-1">
+                                        <div class="assigned-inline">
                                             <span class="badge-indicator assigned">✓</span>
-                                            <small><strong>{{ task.assigned_to.username }}</strong></small>
-                                            <small class="text-muted">({{ task.assigned_to.role }})</small>
+                                            <span>Assigned to: <strong>{{ task.assigned_to.username }}</strong> <small class="text-muted">({{ task.assigned_to.role }})</small></span>
                                         </div>
                                     {% else %}
-                                        <div class="d-flex flex-column align-items-start gap-1">
+                                        <div class="assigned-inline">
                                             <span class="badge-indicator unassigned">✕</span>
-                                            <small><strong>Unassigned</strong></small>
+                                            <span><strong>Not Assigned</strong></span>
                                         </div>
                                     {% endif %}
                                 </td>
                                 <td class="align-middle text-center">
                                     {% if not task.assigned_to %}
-                                        <a href="{% url 'associate_task' task.id %}" class="btn btn-outline-success btn-sm">Assign</a>
+                                        <a href="{% url 'associate_task' task.id %}" class="btn btn-yellow btn-sm">Assign</a>
                                     {% endif %}
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="d-flex justify-content-center">
-                                        <a href="{% url 'task_detail' task.id %}" class="btn btn-sm btn-primary mx-1">View</a>
+                                            <a href="{% url 'task_detail' task.id %}" class="btn btn-sm btn-purple mx-1">View</a>
                                     </div>
                                 </td>
                             </tr>
