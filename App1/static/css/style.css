@@ -139,16 +139,21 @@ a:hover {
     margin-right: 0.5rem;
 }
 .detail-desc {
-    font-size: 0.98rem;
+    font-size: 0.85rem;
     color: #3f3f45;
     margin: 0;
+    font-weight: 400;
 }
-.detail-value { font-weight: 800; font-size: 1.08rem; color: #3a2f44; }
+.detail-value { 
+    font-weight: 400; 
+    font-size: 0.9rem; 
+    color: #3a2f44; 
+}
 
 /* Also ensure strong labels inside cards are emphasized */
 .card p > strong {
     font-weight: 800;
-    font-size: 1.02rem;
+    font-size: 0.95rem;
     color: #5a4a7a;
     margin-right: 0.45rem;
 }
